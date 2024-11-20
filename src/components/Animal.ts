@@ -1,10 +1,4 @@
-import {
-  Assets,
-  FederatedPointerEvent,
-  Point,
-  Rectangle,
-  Ticker
-} from 'pixi.js'
+import { Assets, FederatedPointerEvent, Rectangle, Ticker } from 'pixi.js'
 import { AtlasAttachmentLoader, SkeletonJson, Spine } from '@pixi/spine-pixi'
 
 import { getRandomPoint } from '@/utils/random/getRandomPoint'
@@ -62,30 +56,23 @@ export class Animal extends Spine {
     )
   }
 
-  private updateCollision(fittedPosition?: Point) {
+  updateCollision() {
     const gameBounds = game.getBounds()
     const bounds = this.hitbox.clone()
     bounds.x += this.x
     bounds.y += this.y
     if (gameBounds.containsRect(bounds)) return
 
-    if (fittedPosition) this.position.copyFrom(fittedPosition)
-    else {
-      const fittedBounds = bounds.fit(gameBounds)
-      this.position.set(
-        fittedBounds.x -
-          this.hitbox.x +
-          (fittedBounds.width - this.hitbox.width) / 2,
-        fittedBounds.y -
-          this.hitbox.y +
-          (fittedBounds.height - this.hitbox.height) / 2
-      )
-      fittedPosition = this.position.clone()
-    }
-
+    const fittedBounds = bounds.fit(gameBounds)
+    this.position.set(
+      fittedBounds.x -
+        this.hitbox.x +
+        (fittedBounds.width - this.hitbox.width) / 2,
+      fittedBounds.y -
+        this.hitbox.y +
+        (fittedBounds.height - this.hitbox.height) / 2
+    )
     this.walkingDirection = getRandomPoint()
-    this.updatePosition()
-    this.updateCollision(fittedPosition)
   }
 
   private onPointerDown(e: FederatedPointerEvent) {
