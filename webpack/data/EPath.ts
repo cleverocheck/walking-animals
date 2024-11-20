@@ -3,5 +3,5 @@ export const enum EPath {
   ENTRY_TS = 'Game.ts',
   BUILD = 'build',
   OUTPUT_ENTRY_JS = 'index.js',
-  STATIC = 'public'
+  DEFAULT_STATIC = 'public'
 }

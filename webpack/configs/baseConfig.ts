@@ -32,7 +32,6 @@ export const baseConfig: Configuration = {
     extensions: ['.js', '.ts']
   },
   output: {
-    publicPath: '/public',
     filename: EPath.OUTPUT_ENTRY_JS,
     path: path.join(process.cwd(), EPath.BUILD),
     clean: true
