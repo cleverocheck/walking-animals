@@ -1,18 +1,18 @@
 {
   "name": "walking-animals",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "auhtor": {
+    "name": "Ignat Lomkov",
+    "email": "ignat2006l01@gmail.com",
+    "site": "https://cleverocheck.netlify.app/"
+  },
+  "license": "MIT",
   "scripts": {
     "start": "webpack serve -c webpack/configs/development.ts",
     "build": "webpack -c webpack/configs/production.ts",
     "serve": "serve build",
-    "pretty": "prettier --write .",
-    "lint": "eslint .",
-    "lintFix": "eslint --fix ."
+    "pretty": "prettier --write ."
   },
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
@@ -38,5 +38,8 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0",
     "webpack-merge": "^6.0.1"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
   }
 }

@@ -2,7 +2,6 @@ import {
   Assets,
   FederatedPointerEvent,
   Point,
-  PointData,
   Rectangle,
   Ticker
 } from 'pixi.js'
