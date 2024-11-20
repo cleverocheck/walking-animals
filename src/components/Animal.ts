@@ -2,6 +2,7 @@ import {
   Assets,
   FederatedPointerEvent,
   Point,
+  PointData,
   Rectangle,
   Ticker
 } from 'pixi.js'
@@ -88,15 +89,15 @@ export class Animal extends Spine {
     this.updateCollision(fittedPosition)
   }
 
-  private onPointerDown() {
+  private onPointerDown(e: FederatedPointerEvent) {
     this.ticker.stop()
     this.zIndex = this.DRAGGING_Z_INDEX
+    this.updateDragging(e)
 
     this.onglobalpointermove = this.updateDragging
     document.addEventListener('mouseleave', this.stopDragging)
     window.addEventListener('blur', this.stopDragging)
   }
-
   private updateDragging(e: FederatedPointerEvent) {
     this.position.set(e.globalX, e.globalY)
   }
