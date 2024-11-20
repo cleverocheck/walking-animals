@@ -10,12 +10,20 @@ export const baseConfig: Configuration = {
   module: {
     rules: [
       {
-        test: /\.ts?$/,
+        test: /\.ts$/,
         loader: 'babel-loader'
       },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.jpg$/i,
+        use: [
+          {
+            loader: 'file-loader'
+          }
+        ]
       }
     ]
   },
@@ -24,6 +32,7 @@ export const baseConfig: Configuration = {
     extensions: ['.js', '.ts']
   },
   output: {
+    publicPath: '/public',
     filename: EPath.OUTPUT_ENTRY_JS,
     path: path.join(process.cwd(), EPath.BUILD),
     clean: true

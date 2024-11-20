@@ -1,11 +1,12 @@
+import '@pixi/spine-pixi'
 import 'pixi.js/math-extras'
 import 'reset-css'
 import './index.css'
 
-import { Application, Point, Rectangle } from 'pixi.js'
+import { Application, Assets, Point, Rectangle } from 'pixi.js'
 
+import { Background } from '@/components/Background'
 import { Animal } from '@/components/Animal'
-import { getRandomHEXColor } from '@/utils/random/getRandomHEXColor'
 
 class Game extends Application {
   private readonly ANIMALS_COUNT = 10
@@ -22,12 +23,19 @@ class Game extends Application {
   constructor() {
     super()
 
-    this.init({ resolution: window.devicePixelRatio, resizeTo: window }).then(
-      this.startGame.bind(this)
-    )
+    Promise.all([
+      Assets.load([
+        Background.TEXTURE_PATH,
+        // TODO: don't load spine assets by static paths because there isn't a ready separate atlas loader
+        Animal.SPINE_SKELETON_PATH,
+        Animal.SPINE_ATLAS_PATH
+      ]),
+      this.init({ resolution: window.devicePixelRatio, resizeTo: window })
+    ]).then(this.startGame.bind(this))
   }
 
   private startGame() {
+    this.stage.addChild(new Background())
     this.spawnAnimals()
     this.show()
   }
@@ -37,7 +45,7 @@ class Game extends Application {
     const defaultPosition = new Point(bounds.width / 2, bounds.height / 2)
 
     for (let i = 0; i < this.ANIMALS_COUNT; i++) {
-      const animal = new Animal(getRandomHEXColor())
+      const animal = new Animal()
       animal.position = defaultPosition
 
       this.stage.addChild(animal)
