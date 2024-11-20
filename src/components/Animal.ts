@@ -81,7 +81,7 @@ export class Animal extends Spine {
     this.updateDragging(e)
 
     this.onglobalpointermove = this.updateDragging
-    document.addEventListener('mouseleave', this.stopDragging)
+    game.canvas.addEventListener('mouseleave', this.stopDragging)
     window.addEventListener('blur', this.stopDragging)
   }
   private updateDragging(e: FederatedPointerEvent) {
@@ -93,7 +93,7 @@ export class Animal extends Spine {
     this.zIndex = 0
 
     delete this.onglobalpointermove
-    document.removeEventListener('mouseleave', this.stopDragging)
+    game.canvas.removeEventListener('mouseleave', this.stopDragging)
     window.removeEventListener('blur', this.stopDragging)
   }
 }
